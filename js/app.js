@@ -1,10 +1,3 @@
-/**
- * KIU Explorer — Final Project
- * Demonstrates: DOM, ES6+, Async (callbacks, promises, async/await),
- * Fetch API, and Web Storage (localStorage)
- */
-
-// ===== Storage Keys =====
 const STORAGE_KEYS = {
   theme: 'kiu-theme',
   favorites: 'kiu-favorites',
@@ -12,7 +5,6 @@ const STORAGE_KEYS = {
   subscribers: 'kiu-subscribers',
 };
 
-// ===== Campus facilities data =====
 const CAMPUS_FACILITIES = [
   'State-of-the-art laboratories',
   'Modern libraries and co-working spaces',
@@ -21,39 +13,6 @@ const CAMPUS_FACILITIES = [
   'Interactive Learning Management System',
   'Sports and recreation areas',
 ];
-
-// ===== State =====
-let allPrograms = [];
-let favorites = loadFavorites();
-
-// ===== DOM Element References =====
-const elements = {
-  header: document.getElementById('site-header'),
-  navToggle: document.getElementById('nav-toggle'),
-  navLinks: document.getElementById('nav-links'),
-  themeToggle: document.getElementById('theme-toggle'),
-  themeIcon: document.getElementById('theme-icon'),
-  exploreBtn: document.getElementById('explore-btn'),
-  personalizeBtn: document.getElementById('personalize-btn'),
-  heroGreeting: document.getElementById('hero-greeting'),
-  programsGrid: document.getElementById('programs-grid'),
-  programsStatus: document.getElementById('programs-status'),
-  programSearch: document.getElementById('program-search'),
-  degreeFilter: document.getElementById('degree-filter'),
-  favoritesList: document.getElementById('favorites-list'),
-  clearFavoritesBtn: document.getElementById('clear-favorites-btn'),
-  weatherWidget: document.getElementById('weather-widget'),
-  facilitiesList: document.getElementById('facilities-list'),
-  newsletterForm: document.getElementById('newsletter-form'),
-  formMessage: document.getElementById('form-message'),
-  modalOverlay: document.getElementById('modal-overlay'),
-  modalClose: document.getElementById('modal-close'),
-  visitorNameInput: document.getElementById('visitor-name-input'),
-  saveNameBtn: document.getElementById('save-name-btn'),
-  aboutGrid: document.getElementById('about-grid'),
-};
-
-// ===== Web Storage (localStorage) =====
 
 const loadFavorites = () => {
   try {
@@ -80,7 +39,34 @@ const saveVisitorName = (name) => {
   localStorage.setItem(STORAGE_KEYS.visitorName, name.trim());
 };
 
-// ===== Theme (DOM style manipulation) =====
+let allPrograms = [];
+let favorites = loadFavorites();
+
+const elements = {
+  header: document.getElementById('site-header'),
+  navToggle: document.getElementById('nav-toggle'),
+  navLinks: document.getElementById('nav-links'),
+  themeToggle: document.getElementById('theme-toggle'),
+  themeIcon: document.getElementById('theme-icon'),
+  exploreBtn: document.getElementById('explore-btn'),
+  personalizeBtn: document.getElementById('personalize-btn'),
+  heroGreeting: document.getElementById('hero-greeting'),
+  programsGrid: document.getElementById('programs-grid'),
+  programsStatus: document.getElementById('programs-status'),
+  programSearch: document.getElementById('program-search'),
+  degreeFilter: document.getElementById('degree-filter'),
+  favoritesList: document.getElementById('favorites-list'),
+  clearFavoritesBtn: document.getElementById('clear-favorites-btn'),
+  weatherWidget: document.getElementById('weather-widget'),
+  facilitiesList: document.getElementById('facilities-list'),
+  newsletterForm: document.getElementById('newsletter-form'),
+  formMessage: document.getElementById('form-message'),
+  modalOverlay: document.getElementById('modal-overlay'),
+  modalClose: document.getElementById('modal-close'),
+  visitorNameInput: document.getElementById('visitor-name-input'),
+  saveNameBtn: document.getElementById('save-name-btn'),
+  aboutGrid: document.getElementById('about-grid'),
+};
 
 const applyTheme = (theme) => {
   document.documentElement.setAttribute('data-theme', theme);
@@ -94,13 +80,9 @@ const toggleTheme = () => {
   applyTheme(next);
 };
 
-// ===== Callback-based async (simulated delay) =====
-
 const simulateNetworkDelay = (callback, delayMs = 600) => {
   setTimeout(() => callback(null), delayMs);
 };
-
-// ===== Promise-based Fetch =====
 
 const fetchProgramsWithPromise = () =>
   new Promise((resolve, reject) => {
@@ -114,8 +96,6 @@ const fetchProgramsWithPromise = () =>
       .then((data) => resolve(data))
       .catch((error) => reject(error));
   });
-
-// ===== Async/Await Fetch (weather API) =====
 
 const KUTAISI_COORDS = { latitude: 42.27, longitude: 42.7 };
 
@@ -140,7 +120,7 @@ const renderWeather = (current) => {
   elements.weatherWidget.innerHTML = `
     <div class="weather-content">
       <div>
-        <p style="opacity:0.9;margin-bottom:0.25rem;">Kutaisi Weather (Live)</p>
+        <p class="weather-label">Kutaisi Weather</p>
         <span class="weather-temp">${Math.round(temp)}°C</span>
       </div>
       <p>${description}</p>
@@ -171,8 +151,6 @@ const loadWeather = async () => {
       '<p>Weather data could not be loaded. Please check your internet connection.</p>';
   }
 };
-
-// ===== Programs rendering (Template literals, destructuring, spread) =====
 
 const createProgramCard = (program) => {
   const { id, name, degree, duration, language, description, faculty } = program;
@@ -241,8 +219,6 @@ const updateProgramDisplay = () => {
   renderPrograms(filtered);
 };
 
-// ===== Load programs (callback + promise chain) =====
-
 const loadPrograms = () => {
   elements.programsStatus.textContent = 'Loading programs...';
   elements.programsGrid.innerHTML = '';
@@ -260,8 +236,6 @@ const loadPrograms = () => {
       });
   });
 };
-
-// ===== Favorites (localStorage + DOM) =====
 
 const toggleFavorite = (programId) => {
   const index = favorites.indexOf(programId);
@@ -303,8 +277,6 @@ const clearAllFavorites = () => {
   renderFavoritesList();
 };
 
-// ===== Campus tabs =====
-
 const initCampusTabs = () => {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.campus-panel');
@@ -334,8 +306,6 @@ const initCampusTabs = () => {
   ).join('');
 };
 
-// ===== About cards interaction =====
-
 const initAboutCards = () => {
   const cards = elements.aboutGrid.querySelectorAll('.about-card');
 
@@ -346,8 +316,6 @@ const initAboutCards = () => {
     });
   });
 };
-
-// ===== Navigation =====
 
 const initNavigation = () => {
   elements.navToggle.addEventListener('click', () => {
@@ -370,8 +338,6 @@ const initNavigation = () => {
     elements.header.classList.toggle('scrolled', window.scrollY > 20);
   });
 };
-
-// ===== Modal & personalization =====
 
 const openModal = () => {
   elements.modalOverlay.hidden = false;
@@ -413,7 +379,7 @@ const initModal = () => {
   });
 };
 
-// ===== Newsletter form (sessionStorage for session flag) =====
+const appendSubscribers = (existing, ...entries) => [...existing, ...entries];
 
 const handleNewsletterSubmit = (event) => {
   event.preventDefault();
@@ -432,7 +398,7 @@ const handleNewsletterSubmit = (event) => {
 
   localStorage.setItem(
     STORAGE_KEYS.subscribers,
-    JSON.stringify([...subscribers, newSubscriber])
+    JSON.stringify(appendSubscribers(subscribers, newSubscriber))
   );
 
   sessionStorage.setItem('kiu-subscribed', 'true');
@@ -441,8 +407,6 @@ const handleNewsletterSubmit = (event) => {
   elements.formMessage.className = 'form-message success';
   elements.newsletterForm.reset();
 };
-
-// ===== Event delegation =====
 
 const initEventDelegation = () => {
   elements.programsGrid.addEventListener('click', (event) => {
@@ -459,8 +423,6 @@ const initEventDelegation = () => {
     }
   });
 };
-
-// ===== Initialize application =====
 
 const initApp = () => {
   applyTheme(loadTheme());

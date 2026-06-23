@@ -1,4 +1,4 @@
-/* ===== CSS Variables & Reset ===== */
+/* Variables */
 :root {
   --color-primary: #003366;
   --color-primary-light: #0055a4;
@@ -68,7 +68,7 @@ img {
   padding: 0 1.5rem;
 }
 
-/* ===== Header & Navigation ===== */
+/* Header */
 .site-header {
   position: sticky;
   top: 0;
@@ -163,7 +163,7 @@ img {
   transition: var(--transition);
 }
 
-/* ===== Hero ===== */
+/* Hero */
 .hero {
   padding: 4rem 1.5rem 3rem;
   max-width: 1100px;
@@ -248,7 +248,7 @@ img {
   color: var(--color-text-muted);
 }
 
-/* ===== Buttons ===== */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -305,7 +305,7 @@ img {
   color: var(--color-accent);
 }
 
-/* ===== Sections ===== */
+/* Sections */
 .section {
   padding: 4rem 0;
 }
@@ -326,7 +326,7 @@ img {
   max-width: 700px;
 }
 
-/* ===== About ===== */
+/* About */
 .about-grid {
   display: grid;
   gap: 1.25rem;
@@ -383,12 +383,17 @@ img {
   flex-wrap: wrap;
 }
 
+.weather-label {
+  opacity: 0.9;
+  margin-bottom: 0.25rem;
+}
+
 .weather-temp {
   font-size: 2.5rem;
   font-weight: 700;
 }
 
-/* ===== Programs ===== */
+/* Programs */
 .programs-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -496,7 +501,7 @@ img {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Campus Tabs ===== */
+/* Campus */
 .campus-tabs {
   display: flex;
   gap: 0.5rem;
@@ -541,7 +546,7 @@ img {
   border-left: 4px solid var(--color-accent);
 }
 
-/* ===== Favorites ===== */
+/* Favorites */
 .favorites-list {
   list-style: none;
   margin-bottom: 1.5rem;
@@ -563,7 +568,7 @@ img {
   font-style: italic;
 }
 
-/* ===== Contact ===== */
+/* Contact */
 .contact-grid {
   display: grid;
   gap: 2rem;
@@ -611,7 +616,7 @@ img {
   color: #dc2626;
 }
 
-/* ===== Footer ===== */
+/* Footer */
 .site-footer {
   text-align: center;
   padding: 2rem 1.5rem;
@@ -624,7 +629,7 @@ img {
   color: var(--color-accent);
 }
 
-/* ===== Modal ===== */
+/* Modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -681,7 +686,7 @@ img {
   color: var(--color-text);
 }
 
-/* ===== Mobile Navigation ===== */
+/* Mobile */
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
@@ -713,7 +718,7 @@ img {
   }
 }
 
-/* ===== Utility ===== */
+/* Utility */
 .site-header.scrolled {
   box-shadow: var(--shadow-md);
 }

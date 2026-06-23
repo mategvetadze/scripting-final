@@ -1,258 +1,147 @@
-# KIU Explorer — Project Report (Thesis)
+# KIU Explorer — Project Report
 
-**Course:** Scripting (JavaScript)  
-**Project Title:** KIU Explorer — Interactive Website for Kutaisi International University  
+**Course:** Scripting  
+**Project:** KIU Explorer — Interactive Website for Kutaisi International University  
 **Author:** [Your Full Name]  
 **Student ID:** [Your Student ID]  
-**Submission Date:** June 2026  
-**Exam Period:** 22.06.2026 – 11.07.2026  
+**Date:** June 2026  
 
 ---
 
 ## Abstract
 
-This report describes the design, implementation, and technical features of **KIU Explorer**, an interactive single-page website about Kutaisi International University (KIU). The project was built using only HTML, CSS, and vanilla JavaScript, as required by the final project guidelines. The website allows users to explore academic programs, learn about campus facilities, save favorite programs, personalize their visit, and view live weather data for Kutaisi. The implementation demonstrates core JavaScript competencies including DOM manipulation, ES6+ syntax, asynchronous programming patterns, REST API integration via the Fetch API, and client-side data persistence using Web Storage.
+This report describes my final project — a website about Kutaisi International University (KIU). The site was built using HTML, CSS, and JavaScript. Users can browse academic programs, read about the campus, save favorite programs, switch between light and dark mode, and see current weather in Kutaisi.
 
 ---
 
 ## 1. Introduction
 
-### 1.1 Background
+Kutaisi International University is a public university in Kutaisi, Georgia. It opened in 2020 and offers programs in English in fields like Computer Science, Management, Mathematics, and others. I chose this topic because KIU was recommended for the project and I already know the university.
 
-Kutaisi International University (KIU) is a public research university located in Kutaisi, Georgia. Founded in 2020, it aims to become an international hub of education, science, and technology. Given the recommendation to create a project themed around KIU, this website serves both as an academic deliverable and as a practical demonstration of modern client-side web development techniques.
+The goal of my project was to create a simple but useful website that shows information about KIU and uses the JavaScript topics we studied during the course.
 
-### 1.2 Project Objectives
-
-The primary objectives of this project are:
-
-1. Build a functional, visually appealing website about KIU using HTML, CSS, and JavaScript only.
-2. Demonstrate all required JavaScript concepts specified in the grading criteria.
-3. Provide a user-friendly interface for exploring university information.
-4. Integrate external and local data sources using asynchronous techniques.
-
-### 1.3 Scope and Limitations
-
-The project is a front-end application with no server-side backend. Data is loaded from a local JSON file and a public weather API. User preferences and favorites are stored in the browser's `localStorage`. The project does not use frameworks (React, Vue, etc.) or libraries (jQuery, Bootstrap JS) to comply with assignment restrictions.
+The project works only on the front end. Program data is loaded from a JSON file, and weather data comes from an online API. User settings are saved in the browser.
 
 ---
 
-## 2. Literature Review / Theoretical Background
+## 2. Theoretical Background
 
-### 2.1 The Document Object Model (DOM)
+### 2.1 DOM
 
-The DOM represents the HTML document as a tree of objects that JavaScript can access and modify. Through methods such as `getElementById`, `querySelector`, and `querySelectorAll`, developers can select elements and change their content, attributes, and styles dynamically. Event listeners (`addEventListener`) enable reactive user interfaces.
+The DOM (Document Object Model) lets JavaScript access and change HTML elements. I used `getElementById` and `querySelector` to select elements, and `addEventListener` to handle user actions like clicks and form submission.
 
-### 2.2 ECMAScript 2015+ (ES6+)
+### 2.2 ES6+ JavaScript
 
-Modern JavaScript introduces concise syntax that improves readability and maintainability:
+In my code I used:
 
-- **Arrow functions** — compact function expressions with lexical `this` binding.
-- **Template literals** — string interpolation using backticks and `${}` expressions.
-- **Destructuring** — extracting values from objects and arrays into variables.
-- **Spread/Rest operators** — expanding iterables (`...array`) and collecting arguments.
+- Arrow functions for shorter function syntax
+- Template literals to build HTML strings
+- Destructuring to get values from objects (for example program data)
+- Spread and rest operators (for example `[...programs]` and `...entries`)
 
 ### 2.3 Asynchronous JavaScript
 
-JavaScript is single-threaded; long-running operations use asynchronous patterns:
+I used three approaches:
 
-- **Callbacks** — functions passed as arguments, invoked when an operation completes (e.g., `setTimeout`).
-- **Promises** — objects representing eventual completion or failure, chained with `.then()` and `.catch()`.
-- **Async/Await** — syntactic sugar over Promises for writing asynchronous code in a synchronous style.
+- **Callbacks** — `setTimeout` before loading programs
+- **Promises** — `fetch` with `.then()` and `.catch()` for program data
+- **Async/await** — loading weather data from an external API
 
-### 2.4 Fetch API and JSON
+### 2.4 Fetch API
 
-The Fetch API provides a modern interface for making HTTP requests. It returns Promises and works seamlessly with `response.json()` to parse JSON payloads from REST APIs.
+The Fetch API is used to load `data/programs.json` and to get weather data from Open-Meteo. The responses are parsed as JSON.
 
-### 2.5 Web Storage API
+### 2.5 Web Storage
 
-`localStorage` and `sessionStorage` allow storing key-value pairs in the browser. `localStorage` persists across sessions; `sessionStorage` is cleared when the tab closes. Both store string values; objects are serialized with `JSON.stringify` and parsed with `JSON.parse`.
+`localStorage` saves the theme, favorite programs, visitor name, and newsletter subscribers. `sessionStorage` is used to mark when a user subscribes during the current session.
 
 ---
 
-## 3. System Design
-
-### 3.1 Architecture Overview
-
-The application follows a simple client-side architecture:
+## 3. Project Structure
 
 ```
-index.html          → Structure and semantic markup
-css/styles.css      → Presentation and responsive layout
-js/app.js           → Application logic and interactivity
-data/programs.json  → Local data source for academic programs
+index.html
+css/styles.css
+js/app.js
+data/programs.json
 ```
 
-### 3.2 Page Sections
+The website has these main sections:
 
-| Section    | Purpose                                              |
-|-----------|------------------------------------------------------|
-| Hero      | Welcome message, call-to-action buttons, key stats   |
-| About     | University overview, interactive cards, weather    |
-| Programs  | Searchable/filterable program cards from JSON        |
-| Campus    | Tabbed view of facilities, housing, and location     |
-| Favorites | Saved programs persisted in localStorage             |
-| Contact   | Contact details and newsletter subscription form     |
-
-### 3.3 User Flow
-
-1. User opens the website in a browser (via local server).
-2. Programs load asynchronously from `data/programs.json`.
-3. Weather loads via async/await from Open-Meteo API.
-4. User can search/filter programs, save favorites, toggle theme, and personalize with their name.
-5. All preferences persist in `localStorage` for return visits.
+- Hero — introduction and quick stats
+- About — information about KIU and weather widget
+- Programs — list of academic programs with search and filter
+- Campus — tabs for facilities, housing, and location
+- Favorites — saved programs
+- Contact — contact details and newsletter form
 
 ---
 
 ## 4. Implementation
 
-### 4.1 DOM Manipulation and Event Listeners
+### 4.1 HTML and CSS
 
-**Element selection** is performed at startup using `document.getElementById` and stored in an `elements` object for reuse.
+The page structure is in `index.html`. I used semantic tags like `header`, `main`, `section`, and `footer`. The layout is responsive and works on mobile devices. CSS variables are used for colors, and the user can switch between light and dark theme.
 
-**Dynamic content** is created with `document.createElement` and `innerHTML` using template literals. Program cards are rendered programmatically based on fetched data.
+### 4.2 JavaScript
 
-**Style manipulation** includes toggling CSS classes (`classList.add/remove/toggle`) for theme switching, navigation state, tab panels, and favorite button states. The `data-theme` attribute on `<html>` drives CSS custom properties for light/dark mode.
+All logic is in `app.js`. On page load, the app:
 
-**Event listeners** are attached for:
-- Navigation toggle and smooth scrolling
-- Theme toggle button
-- Search input and degree filter (input/change events)
-- Campus tab buttons
-- Modal open/close
-- Newsletter form submission
-- Event delegation on program and favorites lists (click events)
+1. Loads saved theme and visitor name from localStorage
+2. Fetches programs from JSON
+3. Fetches weather for Kutaisi
+4. Sets up event listeners for navigation, search, favorites, and forms
 
-### 4.2 ES6+ Features
+Program cards are created dynamically with `createElement` and template literals. When the user searches or changes the degree filter, the list updates without reloading the page.
 
-| Feature           | Usage in Project                                      |
-|------------------|-------------------------------------------------------|
-| Arrow functions  | `loadFavorites`, `toggleTheme`, `filterPrograms`, etc. |
-| Template literals| Program cards, weather widget, favorites list HTML    |
-| Destructuring    | `const { id, name, degree } = program`, weather coords |
-| Spread operator  | `[...programs]`, `[...favorites, programId]`          |
-| Rest/defaults    | Filter options object, function parameters            |
+Favorites are stored as an array of program IDs in localStorage. When the user clicks Save on a program, it is added or removed from the list.
 
-### 4.3 Asynchronous JavaScript
+### 4.3 APIs Used
 
-**Callback approach** — `simulateNetworkDelay` uses `setTimeout` to demonstrate callback-based async before fetching programs:
-
-```javascript
-simulateNetworkDelay(() => {
-  fetchProgramsWithPromise()
-    .then((data) => { /* handle success */ })
-    .catch(() => { /* handle error */ });
-});
-```
-
-**Promise approach** — `fetchProgramsWithPromise` wraps `fetch('data/programs.json')` in a Promise chain with `.then()` and `.catch()`.
-
-**Async/Await approach** — `fetchKutaisiWeather` and `loadWeather` use `async/await` to fetch live weather from the Open-Meteo API:
-
-```javascript
-const fetchKutaisiWeather = async () => {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.current;
-};
-```
-
-### 4.4 API Integration
-
-1. **Local JSON** — `data/programs.json` contains structured program data fetched via the Fetch API.
-2. **External API** — Open-Meteo (https://open-meteo.com) provides free weather data for Kutaisi coordinates without requiring an API key.
-
-### 4.5 Web Storage
-
-| Key               | Storage      | Data Stored                    |
-|------------------|--------------|--------------------------------|
-| `kiu-theme`      | localStorage | `"light"` or `"dark"`          |
-| `kiu-favorites`  | localStorage | JSON array of program IDs      |
-| `kiu-visitor-name` | localStorage | User's display name          |
-| `kiu-subscribers` | localStorage | Newsletter subscription list |
-| `kiu-subscribed` | sessionStorage | Session subscription flag    |
+- **Local JSON** — `data/programs.json` contains program names, degrees, descriptions, etc.
+- **Open-Meteo** — free weather API for Kutaisi coordinates (no API key needed)
 
 ---
 
 ## 5. Testing
 
-### 5.1 Manual Test Cases
+I tested the website in Chrome using a local server (`python3 -m http.server 8080`).
 
-| # | Test Case                    | Expected Result                          | Status |
-|---|------------------------------|------------------------------------------|--------|
-| 1 | Open page via local server   | Page loads, programs appear after delay  | ✓      |
-| 2 | Search "Computer"            | Only CS-related programs shown           | ✓      |
-| 3 | Filter by Master degree      | Only MSc programs displayed              | ✓      |
-| 4 | Click "Save" on a program    | Program appears in Favorites section     | ✓      |
-| 5 | Refresh page                 | Favorites and theme persist              | ✓      |
-| 6 | Toggle dark mode             | Colors change, preference saved          | ✓      |
-| 7 | Personalize with name        | Greeting appears, name saved             | ✓      |
-| 8 | Submit newsletter form       | Success message, data in localStorage    | ✓      |
-| 9 | Weather widget (online)      | Kutaisi temperature displayed            | ✓      |
-| 10| Mobile navigation toggle     | Menu opens/closes correctly              | ✓      |
-
-### 5.2 Browser Compatibility
-
-Tested on modern browsers supporting ES6+, Fetch API, and localStorage (Chrome, Firefox, Edge).
+| Test | Result |
+|------|--------|
+| Page loads and programs appear | Works |
+| Search and filter programs | Works |
+| Save and remove favorites | Works |
+| Theme persists after refresh | Works |
+| Weather loads with internet | Works |
+| Newsletter form validation | Works |
+| Mobile menu | Works |
 
 ---
 
-## 6. Results
+## 6. Conclusion
 
-The completed **KIU Explorer** website fulfills all project requirements:
+I built a working website about KIU that uses DOM manipulation, modern JavaScript, asynchronous code, the Fetch API, and browser storage. The project helped me practice the topics from the course in a real example.
 
-- ✅ HTML structure with semantic sections
-- ✅ CSS styling with responsive design and dark mode
-- ✅ DOM element selection, manipulation, and event listeners
-- ✅ ES6+ features (arrow functions, template literals, destructuring, spread)
-- ✅ Callbacks, Promises, and Async/Await
-- ✅ Fetch API with JSON (local and external)
-- ✅ localStorage and sessionStorage
-
-The website presents KIU information in an accessible, interactive format suitable for prospective students and visitors.
+If I had more time, I would add a Georgian language version and more program details from the official KIU website.
 
 ---
 
-## 7. Conclusion
+## 7. References
 
-This project successfully demonstrates fundamental and advanced JavaScript concepts through a real-world themed application. The KIU Explorer website combines static content, dynamic data loading, user personalization, and persistent storage to create a complete client-side web experience. Future improvements could include multi-language support (Georgian/English), integration with KIU's official news API, and accessibility enhancements (ARIA live regions, keyboard navigation).
-
----
-
-## 8. References
-
-1. Kutaisi International University. (2026). *Official Website*. https://www.kiu.edu.ge/
-2. MDN Web Docs. *JavaScript Guide*. https://developer.mozilla.org/en-US/docs/Web/JavaScript
-3. MDN Web Docs. *Using the Fetch API*. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-4. MDN Web Docs. *Web Storage API*. https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
-5. Open-Meteo. *Weather API*. https://open-meteo.com/
+1. Kutaisi International University — https://www.kiu.edu.ge/
+2. MDN Web Docs — JavaScript Guide
+3. MDN Web Docs — Fetch API
+4. MDN Web Docs — Web Storage API
+5. Open-Meteo — https://open-meteo.com/
 
 ---
 
-## Appendix A: File Structure
-
-```
-scripting-final/
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── app.js
-├── data/
-│   └── programs.json
-├── docs/
-│   └── PROJECT_REPORT.md
-└── README.md
-```
-
-## Appendix B: How to Run
+## Appendix: How to Run
 
 ```bash
 cd scripting-final
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080` in your browser.
-
----
-
-*End of Report*
+Open http://localhost:8080 in your browser.
