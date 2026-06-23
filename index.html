@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KIU Explorer — Interactive guide to Kutaisi International University">
+  <title>KIU Explorer | Kutaisi International University</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" id="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#hero" class="logo">
+        <span class="logo-icon">KIU</span>
+        <span class="logo-text">Explorer</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#programs" class="nav-link">Programs</a></li>
+        <li><a href="#campus" class="nav-link">Campus</a></li>
+        <li><a href="#favorites" class="nav-link">Favorites</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <p class="hero-motto">Hic Scientia futūrum creat!</p>
+        <h1>Welcome to <span class="highlight">Kutaisi International University</span></h1>
+        <p class="hero-subtitle">
+          Place where knowledge creates future — explore programs, campus life, and join a vibrant international community in Kutaisi, Georgia.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="explore-btn">Explore Programs</button>
+          <button class="btn btn-secondary" id="personalize-btn">Personalize Experience</button>
+        </div>
+        <p class="hero-greeting" id="hero-greeting" hidden></p>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat-card">
+          <span class="stat-value">2020</span>
+          <span class="stat-label">Founded</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">160</span>
+          <span class="stat-label">Hectares Campus</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">1500+</span>
+          <span class="stat-label">Students</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container">
+        <h2 class="section-title">About KIU</h2>
+        <p class="section-intro">
+          Kutaisi International University is a public research university established in 2020,
+          designed to become an international hub of education, science, and technology in the Caucasus region.
+        </p>
+        <div class="about-grid" id="about-grid">
+          <article class="about-card" data-topic="mission">
+            <h3>Our Mission</h3>
+            <p>Prepare highly qualified workforce and human capital that promotes economic growth in Georgia and the wider region.</p>
+          </article>
+          <article class="about-card" data-topic="campus">
+            <h3>Green Campus</h3>
+            <p>160 hectares surrounded by forest with a river running through — only 25 km from Kutaisi International Airport.</p>
+          </article>
+          <article class="about-card" data-topic="international">
+            <h3>International Focus</h3>
+            <p>English-language programs, international faculty, and a multicultural environment welcoming students worldwide.</p>
+          </article>
+        </div>
+        <div class="weather-widget" id="weather-widget">
+          <p class="loading-text">Loading Kutaisi weather...</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="section programs">
+      <div class="container">
+        <h2 class="section-title">Academic Programs</h2>
+        <div class="programs-toolbar">
+          <input
+            type="search"
+            id="program-search"
+            class="search-input"
+            placeholder="Search programs..."
+            aria-label="Search programs"
+          >
+          <select id="degree-filter" class="filter-select" aria-label="Filter by degree">
+            <option value="all">All degrees</option>
+            <option value="Bachelor">Bachelor</option>
+            <option value="Master">Master</option>
+          </select>
+        </div>
+        <div class="programs-status" id="programs-status" role="status"></div>
+        <div class="programs-grid" id="programs-grid"></div>
+      </div>
+    </section>
+
+    <section id="campus" class="section campus">
+      <div class="container">
+        <h2 class="section-title">Campus Highlights</h2>
+        <div class="campus-tabs" role="tablist" aria-label="Campus sections">
+          <button class="tab-btn active" role="tab" aria-selected="true" data-tab="facilities">Facilities</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="housing">Housing</button>
+          <button class="tab-btn" role="tab" aria-selected="false" data-tab="location">Location</button>
+        </div>
+        <div class="campus-panel active" id="panel-facilities" role="tabpanel">
+          <ul class="feature-list" id="facilities-list"></ul>
+        </div>
+        <div class="campus-panel" id="panel-housing" role="tabpanel" hidden>
+          <p>KIU is the only higher education institution in Georgia providing fully furnished on-campus housing for students and academic personnel. Modern dormitories include study areas, common rooms, and high-speed internet.</p>
+        </div>
+        <div class="campus-panel" id="panel-location" role="tabpanel" hidden>
+          <p><strong>Address:</strong> Akhalgazrdoba Ave. Lane 5/7, Kutaisi, 4600, Georgia</p>
+          <p><strong>Distance:</strong> 25 km from Kutaisi International Airport · ~3 hours drive from Tbilisi</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="favorites" class="section favorites">
+      <div class="container">
+        <h2 class="section-title">My Favorite Programs</h2>
+        <p class="section-intro">Programs you save are stored in <code>localStorage</code> and persist between visits.</p>
+        <ul class="favorites-list" id="favorites-list"></ul>
+        <button class="btn btn-secondary" id="clear-favorites-btn">Clear All Favorites</button>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="section-title">Contact & Newsletter</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p><strong>Email:</strong> <a href="mailto:info@kiu.edu.ge">info@kiu.edu.ge</a></p>
+            <p><strong>International:</strong> <a href="mailto:international@kiu.edu.ge">international@kiu.edu.ge</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+995577477197">(+995) 577 477 197</a></p>
+          </div>
+          <form class="newsletter-form" id="newsletter-form" novalidate>
+            <label for="subscriber-name">Your name</label>
+            <input type="text" id="subscriber-name" name="subscriber-name" required placeholder="Enter your name">
+            <label for="subscriber-email">Email address</label>
+            <input type="email" id="subscriber-email" name="subscriber-email" required placeholder="you@example.com">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+            <p class="form-message" id="form-message" role="alert"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kutaisi International University · Final Project — Scripting Course</p>
+    <p class="footer-link"><a href="https://www.kiu.edu.ge/" target="_blank" rel="noopener noreferrer">Official KIU Website</a></p>
+  </footer>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Close dialog">&times;</button>
+      <h2 id="modal-title">Personalize Your Visit</h2>
+      <p>Enter your name to save preferences locally in your browser.</p>
+      <input type="text" id="visitor-name-input" placeholder="Your name" maxlength="50">
+      <button class="btn btn-primary" id="save-name-btn">Save</button>
+    </div>
+  </div>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

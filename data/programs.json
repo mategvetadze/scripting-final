@@ -1,0 +1,78 @@
+{
+  "university": "Kutaisi International University",
+  "lastUpdated": "2026-06-01",
+  "programs": [
+    {
+      "id": "cs-bsc",
+      "name": "Computer Science",
+      "degree": "Bachelor of Science",
+      "duration": "4 years",
+      "language": "English",
+      "description": "Study algorithms, software engineering, artificial intelligence, and modern computing technologies in a research-oriented environment.",
+      "faculty": "School of Computer Science"
+    },
+    {
+      "id": "math-bsc",
+      "name": "Mathematics & Applications",
+      "degree": "Bachelor of Science",
+      "duration": "4 years",
+      "language": "English",
+      "description": "Foundations of Artificial Intelligence, Scientific Computing, and Financial Mathematics for analytical problem solvers.",
+      "faculty": "School of Mathematics"
+    },
+    {
+      "id": "mgmt-bsc",
+      "name": "Management",
+      "degree": "Bachelor of Science",
+      "duration": "4 years",
+      "language": "English",
+      "description": "Develop leadership, entrepreneurship, and business strategy skills for the global marketplace.",
+      "faculty": "School of Management"
+    },
+    {
+      "id": "design-bsc",
+      "name": "Design",
+      "degree": "Bachelor",
+      "duration": "4 years",
+      "language": "English",
+      "description": "Explore visual communication, product design, and creative technologies on a modern campus.",
+      "faculty": "School of Design"
+    },
+    {
+      "id": "psych-bsc",
+      "name": "Psychology",
+      "degree": "Bachelor of Science",
+      "duration": "4 years",
+      "language": "English",
+      "description": "Understand human behavior, cognition, and mental health through evidence-based scientific methods.",
+      "faculty": "School of Psychology"
+    },
+    {
+      "id": "law-bsc",
+      "name": "Law",
+      "degree": "Bachelor of Law",
+      "duration": "4 years",
+      "language": "English / Georgian",
+      "description": "Study Georgian and international legal systems, preparing for careers in law and public service.",
+      "faculty": "School of Law"
+    },
+    {
+      "id": "fim-msc",
+      "name": "Finance and Information Management",
+      "degree": "Master of Science",
+      "duration": "2 years",
+      "language": "English",
+      "description": "Combine financial expertise with data-driven decision making for modern organizations.",
+      "faculty": "Graduate School"
+    },
+    {
+      "id": "ecs-msc",
+      "name": "Embedded Computing Systems",
+      "degree": "Master of Science",
+      "duration": "2 years",
+      "language": "English",
+      "description": "Design and implement embedded systems for IoT, robotics, and smart device applications.",
+      "faculty": "Graduate School"
+    }
+  ]
+}
